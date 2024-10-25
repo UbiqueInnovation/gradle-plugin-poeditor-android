@@ -21,5 +21,4 @@ enum class StringsFileType {
 	XMB,
 	XTB,
 	ARB,
-	RISE_360_XLIF,
 }
