@@ -18,7 +18,7 @@ abstract class PoEditorPullTask : DefaultTask() {
 	@get:Optional
 	abstract var apiKey: String?
 	@get:Input
-	abstract var projectId: Int
+	abstract var projectId: String
 	@get:Input
 	abstract var defaultLanguage: String
 	@get:Input

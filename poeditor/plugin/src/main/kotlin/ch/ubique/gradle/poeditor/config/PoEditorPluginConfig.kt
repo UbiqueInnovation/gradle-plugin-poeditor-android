@@ -2,8 +2,8 @@ package ch.ubique.gradle.poeditor.config
 
 import ch.ubique.gradle.poeditor.api.StringsFileType
 import org.gradle.api.Project
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
-import java.io.File
 import javax.inject.Inject
 
 abstract class PoEditorPluginConfig
@@ -19,7 +19,7 @@ constructor(project: Project) {
 	/**
 	 * The ID of the PoEditor project to pull translations from.
 	 */
-	val projectId: Property<Int> = objects.property(Int::class.java)
+	val projectId: Property<String> = objects.property(String::class.java)
 
 	/**
 	 * The type/format of the strings file to export, defaults to ANDROID_STRINGS.
@@ -39,7 +39,7 @@ constructor(project: Project) {
 	/**
 	 * The resource base directory to export the translations to, defaults to "src/main/res".
 	 */
-	val resourceDir: Property<File> = objects.property(File::class.java).apply { set(project.file("src/main/res")) }
+	val resourceDir: RegularFileProperty = objects.fileProperty().apply { set(project.file("src/main/res")) }
 
 	/**
 	 * The resource type to export the translations to, defaults to "values".

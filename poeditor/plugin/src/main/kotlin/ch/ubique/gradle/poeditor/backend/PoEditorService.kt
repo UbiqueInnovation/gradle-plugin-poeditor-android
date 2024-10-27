@@ -20,21 +20,21 @@ internal interface PoEditorService {
 	@POST("projects/view")
 	fun projectsView(
 		@Field("api_token") token: String,
-		@Field("id") projectId: Int,
+		@Field("id") projectId: String,
 	): Call<ApiResponse<ProjectResult>>
 
 	@FormUrlEncoded
 	@POST("languages/list")
 	fun languagesList(
 		@Field("api_token") token: String,
-		@Field("id") projectId: Int,
+		@Field("id") projectId: String,
 	): Call<ApiResponse<LanguagesResult>>
 
 	@FormUrlEncoded
 	@POST("projects/export")
 	fun export(
 		@Field("api_token") token: String,
-		@Field("id") projectId: Int,
+		@Field("id") projectId: String,
 		@Field("language") language: String,
 		@Field("type") fileType: String,
 		@Field("fallback_language") fallbackLanguage: String? = null,

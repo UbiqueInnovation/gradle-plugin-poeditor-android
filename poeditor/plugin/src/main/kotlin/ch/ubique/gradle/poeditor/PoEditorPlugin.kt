@@ -19,7 +19,7 @@ abstract class PoEditorPlugin : Plugin<Project> {
 			task.fileType = extension.fileType.get()
 			task.defaultLanguage = extension.defaultLanguage.get()
 			task.fallbackLanguage = extension.fallbackLanguage.orNull
-			task.resourceDir = extension.resourceDir.get().also { it.mkdirs() }
+			task.resourceDir = extension.resourceDir.get().asFile.also { it.mkdirs() }
 			task.resourceType = extension.resourceType.get()
 			task.filename = extension.fileName.get()
 			task.exportOptions = extension.exportOptions.orNull
