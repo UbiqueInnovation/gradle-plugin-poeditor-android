@@ -53,12 +53,13 @@ abstract class PoEditorPullTask : DefaultTask() {
 
 		val languages = client.getLanguages(projectId)
 
-		languages.parallelStream().forEach { language ->
+		languages.forEach { language ->
 			val localePostfix = if (language.code == defaultLanguage) "" else "-" + language.code.toAndroidLocale()
 			val path = File(resourceDir, "$resourceType$localePostfix")
 			path.mkdirs()
 			val file = File(path, filename)
 			client.export(projectId, language.code, fileType.name.lowercase(), fallbackLang, exportOptions, file)
+			println("Exported ${language.name} to ${file.toRelativeString(project.projectDir)}")
 		}
 	}
 

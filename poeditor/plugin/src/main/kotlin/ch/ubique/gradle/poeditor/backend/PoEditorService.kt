@@ -1,9 +1,6 @@
 package ch.ubique.gradle.poeditor.backend
 
-import ch.ubique.gradle.poeditor.backend.model.ApiResponse
-import ch.ubique.gradle.poeditor.backend.model.ExportResult
-import ch.ubique.gradle.poeditor.backend.model.LanguagesResult
-import ch.ubique.gradle.poeditor.backend.model.ProjectResult
+import ch.ubique.gradle.poeditor.backend.model.*
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -40,5 +37,29 @@ internal interface PoEditorService {
 		@Field("fallback_language") fallbackLanguage: String? = null,
 		@Field("options") options: String? = null,
 	): Call<ApiResponse<ExportResult>>
+
+	@FormUrlEncoded
+	@POST("terms/list")
+	fun termsList(
+		@Field("api_token") token: String,
+		@Field("id") projectId: String,
+	): Call<ApiResponse<TermsResult>>
+
+	@FormUrlEncoded
+	@POST("terms/add")
+	fun termsAdd(
+		@Field("api_token") token: String,
+		@Field("id") projectId: String,
+		@Field("data") termJson: String,
+	): Call<ApiResponse<TermsChangedResult>>
+
+	@FormUrlEncoded
+	@POST("translations/add")
+	fun translationsAdd(
+		@Field("api_token") token: String,
+		@Field("id") projectId: String,
+		@Field("language") language: String,
+		@Field("data") translationsJson: String,
+	): Call<ApiResponse<TranslationsChangedResult>>
 
 }

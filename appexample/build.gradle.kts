@@ -39,7 +39,7 @@ dependencies {
 
 poeditor {
 	apiKey = System.getenv("UBIQUE_POEDITOR_API_KEY") ?: extra["ubiquePoEditorAPIKey"] as? String
-	projectId = "505095"
+	projectId = "394599"
 	defaultLanguage = "en"
 	fallbackLanguage = "de"
 	resourceDir = layout.buildDirectory.file("poeditor-output")

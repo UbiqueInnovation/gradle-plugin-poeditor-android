@@ -1,8 +1,7 @@
 package ch.ubique.gradle.poeditor.backend
 
-import ch.ubique.gradle.poeditor.backend.model.ApiResponse
-import ch.ubique.gradle.poeditor.backend.model.Language
-import ch.ubique.gradle.poeditor.backend.model.Project
+import ch.ubique.gradle.poeditor.backend.model.*
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.gradle.api.GradleException
@@ -21,11 +20,12 @@ internal class PoEditorClient(
 		const val HOST: String = "https://api.poeditor.com/v2/"
 	}
 
+	private val moshi = Moshi.Builder().build()
 	private val httpClient = OkHttpClient.Builder().build()
 	private val service = Retrofit.Builder()
 		.baseUrl(host)
 		.client(httpClient)
-		.addConverterFactory(MoshiConverterFactory.create())
+		.addConverterFactory(MoshiConverterFactory.create(moshi))
 		.build()
 		.create(PoEditorService::class.java)
 
@@ -50,6 +50,20 @@ internal class PoEditorClient(
 				}
 			}
 		}
+	}
+
+	fun getTerms(projectId: String): List<Term> {
+		return service.termsList(apiKey, projectId).requireResult().terms
+	}
+
+	fun addTerm(projectId: String, term: Term): TermsMutation {
+		val termJson = "[" + moshi.adapter(Term::class.java).toJson(term) + "]"
+		return service.termsAdd(apiKey, projectId, termJson).requireResult().terms
+	}
+
+	fun addTranslations(projectId: String, language: String, translation: Translation): TranslationsMutation {
+		val translationsJson = "[" + moshi.adapter(Translation::class.java).toJson(translation) + "]"
+		return service.translationsAdd(apiKey, projectId, language, translationsJson).requireResult().translations
 	}
 
 	private inline fun <reified T> Call<ApiResponse<T>>.requireResult(): T {
