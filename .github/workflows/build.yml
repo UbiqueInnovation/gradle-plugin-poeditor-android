@@ -1,0 +1,29 @@
+name: Build Example
+
+on: [ push, workflow_dispatch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      UBIQUE_POEDITOR_API_KEY: X
+    steps:
+      # Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+
+      # Setup JDK environment
+      - name: Set up JDK
+        uses: actions/setup-java@v4.3.0
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Grant permission to execute
+        run: chmod +x gradlew
+
+      # Run the Gradle tasks
+      - name: Dry run :poeditorPull
+        run: ./gradlew :appexample:poeditorPull --dry-run
+      - name: Dry run :poeditorAddTerm
+        run: ./gradlew :appexample:poeditorAddTerm --dry-run

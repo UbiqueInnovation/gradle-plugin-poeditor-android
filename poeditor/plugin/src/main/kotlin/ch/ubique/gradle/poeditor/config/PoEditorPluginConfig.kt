@@ -32,7 +32,7 @@ constructor(project: Project) {
 	val defaultLanguage: Property<String> = objects.property(String::class.java).apply { set("en") }
 
 	/**
-	 * The language code to use as the fallback language, i.e. when translations are missing, defaults to the project's reference language.
+	 * The language code to use as the fallback language, i.e. when translations are missing, defaults to the project's fallback language.
 	 */
 	val fallbackLanguage: Property<String?> = objects.property(String::class.java)
 
