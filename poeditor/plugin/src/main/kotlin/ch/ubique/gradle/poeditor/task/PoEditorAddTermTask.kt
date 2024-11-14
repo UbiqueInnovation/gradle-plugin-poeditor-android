@@ -46,10 +46,12 @@ abstract class PoEditorAddTermTask : DefaultTask() {
 
 		println("Please provide term details.")
 
+		val termPattern = Regex("[a-zA-Z][a-zA-Z0-9_]*")
+
 		do {
 			val termId = prompt("Term identifier: ").trim()
-			if (!termId.matches(Regex("[a-z][a-z0-9_]*"))) {
-				throw GradleException("Invalid term identifier '$termId'. Must match [a-z][a-z0-9_]*")
+			if (!termId.matches(termPattern)) {
+				throw GradleException("Invalid term identifier '$termId'. Must match ${termPattern.pattern}")
 			}
 
 			if (termId in existingTerms) {
