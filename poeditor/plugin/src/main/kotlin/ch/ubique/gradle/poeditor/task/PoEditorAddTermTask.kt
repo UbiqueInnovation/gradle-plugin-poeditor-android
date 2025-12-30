@@ -17,10 +17,13 @@ abstract class PoEditorAddTermTask : DefaultTask() {
 	@get:Input
 	@get:Optional
 	abstract var apiKey: String?
+
 	@get:Input
 	abstract var projectId: String
+
 	@get:Input
 	abstract var defaultLanguage: String
+
 	@get:Input
 	@get:Optional
 	abstract var fallbackLanguage: String?

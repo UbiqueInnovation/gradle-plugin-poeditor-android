@@ -17,24 +17,34 @@ abstract class PoEditorPullTask : DefaultTask() {
 	@get:Input
 	@get:Optional
 	abstract var apiKey: String?
+
 	@get:Input
 	abstract var projectId: String
+
 	@get:Input
 	abstract var defaultLanguage: String
+
 	@get:Input
 	@get:Optional
 	abstract var fallbackLanguage: String?
+
 	@get:Input
 	abstract var fileType: StringsFileType
+
 	@get:InputDirectory
 	abstract var resourceDir: File
+
 	@get:Input
 	abstract var resourceType: String
+
 	@get:Input
 	abstract var filename: String
+
 	@get:Input
 	@get:Optional
 	abstract var exportOptions: String?
+
+	private val projectDir = project.projectDir
 
 	init {
 		group = "poeditor"
@@ -59,7 +69,7 @@ abstract class PoEditorPullTask : DefaultTask() {
 			path.mkdirs()
 			val file = File(path, filename)
 			client.export(projectId, language.code, fileType.name.lowercase(), fallbackLang, exportOptions, file)
-			println("Exported ${language.name} to ${file.toRelativeString(project.projectDir)}")
+			println("Exported ${language.name} to ${file.toRelativeString(projectDir)}")
 		}
 	}
 
