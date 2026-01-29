@@ -14,7 +14,7 @@ constructor(project: Project) {
 	/**
 	 * The API key for the PoEditor API.
 	 */
-	val apiKey: Property<String?> = objects.property(String::class.java)
+	val apiKey: Property<String> = objects.property(String::class.java)
 
 	/**
 	 * The ID of the PoEditor project to pull translations from.
@@ -34,7 +34,7 @@ constructor(project: Project) {
 	/**
 	 * The language code to use as the fallback language, i.e. when translations are missing, defaults to the project's fallback language.
 	 */
-	val fallbackLanguage: Property<String?> = objects.property(String::class.java)
+	val fallbackLanguage: Property<String> = objects.property(String::class.java)
 
 	/**
 	 * The resource base directory to export the translations to, defaults to "src/main/res".
@@ -54,6 +54,6 @@ constructor(project: Project) {
 	/**
 	 * Additional PoEditor export options as a JSON string, defaults to "[{\"unquoted\":1}]".
 	 */
-	val exportOptions: Property<String?> = objects.property(String::class.java).apply { set("[{\"unquoted\":1}]") }
+	val exportOptions: Property<String> = objects.property(String::class.java).apply { set("[{\"unquoted\":1}]") }
 
 }
