@@ -10,7 +10,7 @@ Gradle Plugin to sync translations with PoEditor.
 
 ```kotlin
 plugins {
-    id("ch.ubique.gradle.poeditor") version "1.0.0"
+    id("ch.ubique.gradle.poeditor") version "1.1.0"
 }
 ```
 
