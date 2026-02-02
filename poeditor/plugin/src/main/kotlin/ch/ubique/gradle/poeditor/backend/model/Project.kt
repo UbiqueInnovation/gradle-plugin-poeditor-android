@@ -13,9 +13,9 @@ internal data class Project(
 	val id: String,
 	val name: String,
 	val description: String? = null,
-	@Json(name = "public") val isPublic: Int,
+	@param:Json(name = "public") val isPublic: Int,
 	val open: Int,
-	@Json(name = "reference_language") val referenceLanguage: String,
-	@Json(name = "fallback_language") val fallbackLanguage: String,
+	@param:Json(name = "reference_language") val referenceLanguage: String,
+	@param:Json(name = "fallback_language") val fallbackLanguage: String,
 	val created: String,
 )

@@ -3,18 +3,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	alias(libs.plugins.androidApplication)
-	alias(libs.plugins.kotlinAndroid)
 	id("ch.ubique.gradle.poeditor")
 }
 
 android {
 	namespace = "ch.ubique.poeditor.example"
-	compileSdk = 34
+	compileSdk = 36
 
 	defaultConfig {
 		applicationId = "ch.ubique.poeditor.example"
 		minSdk = 26
-		targetSdk = 34
+		targetSdk = 36
 		versionCode = 1
 		versionName = project.version.toString()
 
@@ -29,12 +28,10 @@ android {
 
 tasks.withType<KotlinCompile> {
 	compilerOptions.jvmTarget = JvmTarget.JVM_17
-	kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
 }
 
 dependencies {
 	implementation(libs.androidx.appcompat)
-	implementation(libs.androidx.lifecycle.viewmodelKtx)
 }
 
 poeditor {
@@ -44,4 +41,5 @@ poeditor {
 	fallbackLanguage = "de"
 	resourceDir = layout.buildDirectory.file("poeditor-output")
 	fileName = "strings.xml"
+	exportOptions = null
 }

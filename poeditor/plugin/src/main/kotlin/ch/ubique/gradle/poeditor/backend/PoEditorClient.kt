@@ -45,7 +45,7 @@ internal class PoEditorClient(
 				throw GradleException("Failed to download translations with response ${response.code} ${response.message}")
 			}
 			file.outputStream().use { output ->
-				response.body!!.byteStream().use { input ->
+				response.body.byteStream().use { input ->
 					input.copyTo(output)
 				}
 			}
