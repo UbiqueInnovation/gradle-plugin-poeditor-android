@@ -2,7 +2,9 @@ package ch.ubique.gradle.poeditor.config
 
 import ch.ubique.gradle.poeditor.api.StringsFileType
 import org.gradle.api.Project
+import org.gradle.api.file.RegularFile
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import javax.inject.Inject
 
@@ -56,4 +58,15 @@ constructor(project: Project) {
 	 */
 	val exportOptions: Property<String> = objects.property(String::class.java).apply { set("[{\"unquoted\":1}]") }
 
+	/**
+	 * Map of flavor prefixes that will be exported to the specified directory
+	 */
+	val flavorPrefixes: MapProperty<String, RegularFile> =
+		objects.mapProperty(String::class.java, RegularFile::class.java).apply { set(emptyMap()) }
+
+	/**
+	 * The Prefix Separator will be stripped alongside the prefix from the string name. Default "_"
+	 */
+	val flavorPrefixSeparator: Property<String> =
+		objects.property(String::class.java).apply { set("_") }
 }
