@@ -5,6 +5,7 @@ import ch.ubique.gradle.poeditor.task.PoEditorAddTermTask
 import ch.ubique.gradle.poeditor.task.PoEditorPullTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import kotlin.jvm.java
 
 abstract class PoEditorPlugin : Plugin<Project> {
 
@@ -24,6 +25,8 @@ abstract class PoEditorPlugin : Plugin<Project> {
 			task.resourceType = extension.resourceType.get()
 			task.filename = extension.fileName.get()
 			task.exportOptions = extension.exportOptions.orNull
+			task.flavorPrefixes = extension.flavorPrefixes.get()
+			task.flavorPrefixSeparator = extension.flavorPrefixSeparator.get()
 		}
 
 		project.tasks.register(

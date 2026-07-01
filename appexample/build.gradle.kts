@@ -36,10 +36,15 @@ dependencies {
 
 poeditor {
 	apiKey = System.getenv("UBIQUE_POEDITOR_API_KEY") ?: extra["ubiquePoEditorAPIKey"] as? String
-	projectId = "394599"
+	projectId = "234253"
 	defaultLanguage = "en"
 	fallbackLanguage = "de"
 	resourceDir = layout.buildDirectory.file("poeditor-output")
 	fileName = "strings.xml"
 	exportOptions = null
+	flavorPrefixes = mapOf(
+		"onboarding" to layout.buildDirectory.file("poeditor-output-onboarding").get(),
+		"gafor" to layout.buildDirectory.file("poeditor-output-gafor").get(),
+	)
+	flavorPrefixSeparator = "_"
 }

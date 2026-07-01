@@ -9,7 +9,6 @@ import retrofit2.Call
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.File
 
 internal class PoEditorClient(
 	private val apiKey: String,
@@ -37,18 +36,14 @@ internal class PoEditorClient(
 		return service.languagesList(apiKey, projectId).requireResult().languages
 	}
 
-	fun export(projectId: String, code: String, fileType: String, fallbackLanguage: String?, options: String?, file: File) {
+	fun exportToXml(projectId: String, code: String, fileType: String, fallbackLanguage: String?, options: String?): String {
 		val url = service.export(apiKey, projectId, code, fileType, fallbackLanguage, options).requireResult().url
 		val request = Request.Builder().url(url).build()
 		httpClient.newCall(request).execute().use { response ->
 			if (!response.isSuccessful) {
 				throw GradleException("Failed to download translations with response ${response.code} ${response.message}")
 			}
-			file.outputStream().use { output ->
-				response.body.byteStream().use { input ->
-					input.copyTo(output)
-				}
-			}
+			return response.body.string()
 		}
 	}
 
